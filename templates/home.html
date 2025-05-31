@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Головна</h1>
+{% if user %}
+    <p>Вітаю, {{ user }}!</p>
+    <a href='/logout'>Вихід</a> |
+    <a href='/profile'>Профіль</a>
+{% else %}
+    <a href="/login">Увійти</a> | <a href="/register">Зареєструватися</a>
+{% endif %}
+
+<hr>
+<h2>Коментарі</h2>
+<ul>
+    {% for row in comments %}
+        <li><b>{{ row['username'] }}</b>: {{ row['content'] }}</li>
+    {% endfor %}
+</ul>
+
+{% if user %}
+<form method="POST" action="/comment">
+    <textarea name="content" class="form-control" required></textarea><br>
+    <button type="submit" class="btn btn-primary">Надіслати</button>
+</form>
+{% endif %}
+{% endblock %}

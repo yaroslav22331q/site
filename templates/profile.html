@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Профіль: {{ user['username'] }}</h2>
+<p>Бали: {{ user['score'] }}</p>
+
+<h3>Передати бали:</h3>
+<form method="POST" action="/transfer">
+    Кому:
+    <select name="receiver" class="form-select">
+        {% for u in all_users %}
+            <option value="{{ u['username'] }}">{{ u['username'] }}</option>
+        {% endfor %}
+    </select><br>
+    Скільки балів: <input name="amount" type="number" min="1" class="form-control"><br>
+    <button type="submit" class="btn btn-warning">Відправити</button>
+</form>
+<p><a href="/">Назад</a></p>
+{% endblock %}

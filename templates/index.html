@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Коментарі:</h2>
+<ul>
+    {% for comment, username in comments %}
+        <li><strong>{{ username }}:</strong> {{ comment }}</li>
+    {% endfor %}
+</ul>
+
+{% if session.get('username') %}
+    <form method="POST" action="/comment">
+        <textarea name="content" placeholder="Напишіть коментар..." required></textarea><br>
+        <button type="submit">Надіслати</button>
+    </form>
+{% else %}
+    <p><a href="/login">Увійдіть</a>, щоб залишати коментарі.</p>
+{% endif %}
+{% endblock %}
